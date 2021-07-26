@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { userContext } from '../Context/userContext';
 import { Image } from '../Styles/LogoStyled';
 
 const Logo = () => {
+	const { state } = useContext(userContext)
+	const { isLogged } = state
 
-  const logoPath = isLogged ? 'logo-black' : 'logo-white'
+	const logoPath = isLogged ? 'logo-black' : 'logo-white'
 
-  return (
-    <div>
-      <Image src={`../Images/${logoPath}.png`} alt="logo" />
-    </div>
-  )
+	return (
+		<div>
+			<img src={`/icon/${logoPath}.svg`} alt='svg'/>
+		</div>
+	)
 }
 
 export default Logo;

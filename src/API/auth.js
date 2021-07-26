@@ -1,14 +1,21 @@
-import { post } from "../API/getMethod";
 import { RESOURCES, HTTP_STATUS } from "../Config/constants";
 import { transformData } from "../Config/dataFormat";
 import { storeAuthToken } from "./authToken";
 import { storeRefreshToken } from "./refreshToken";
+import { SETTINGS } from "../Config/settings";
 
 
 const refreshAuthToken = async (refreshToken) => {
-	const response = await post(RESOURCES.AUTH, {
-		'refreshToken': refreshToken
-	})
+	const requestOptions = {
+		headers: {
+			apiKey: SETTINGS.API_KEY,
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		body: JSON.stringify({ 'refreshToken': refreshToken }),
+	}
+
+	const response = await fetch(`${SETTINGS.API_URL}/${RESOURCES.AUTH}`, requestOptions)
 
 	if (response && response.status === HTTP_STATUS.OK) {
 		const authToken = response.headers.get('Authorization')
@@ -22,11 +29,20 @@ const refreshAuthToken = async (refreshToken) => {
 }
 
 const userLogin = async (data = {}) => {
-	const response = await post(RESOURCES.AUTH, data)
+	const requestOptions = {
+		headers: {
+			apiKey: SETTINGS.API_KEY,
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		body: JSON.stringify(data),
+	}
+
+	const response = await fetch(`${SETTINGS.API_URL}/${RESOURCES.AUTH}`, requestOptions)
 
 	//User is logged
 	if (response && response.status === HTTP_STATUS.OK) {
-		const { headers = {}} = response
+		const { headers = {} } = response
 
 		//store token in local storage
 		storeAuthToken(headers.get('Authorization'))

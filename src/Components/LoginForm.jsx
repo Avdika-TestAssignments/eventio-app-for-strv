@@ -8,6 +8,10 @@ import React from 'react';
 // import { userLogin } from '../API/auth';
 // import ErrorMessage from './ErrorMessage';
 // import { userContext } from '../Context/userContext';
+import { FormStyle } from '../Styles/LoginFormStyled';
+import Input from '../Input'
+import Label from '../Label'
+import FormLine from '../FormLine'
 
 const LoginForm = () => {
 	// const [loginError, setLoginError] = useState(false)
@@ -18,6 +22,7 @@ const LoginForm = () => {
 	//const { register, handleSubmit } = useForm();
 
 	// const _onSubmit = async (data) => {
+	// 	console.log(data)
 	// 	try {
 	// 		//request sent, show loading
 	// 		setLoginError(false)
@@ -38,23 +43,33 @@ const LoginForm = () => {
 		<>
 			{/* <div>{loginError && ErrorMessage('Ooops. Invalid email or password.')}</div> */}
 			{/* <div>{isSending && <span>Loging in....</span>}</div> */}
-			<form>
-			{/* <form onSubmit={handleSubmit(_onSubmit)}> */}
-				<div>
-					<label htmlFor='email'>Email</label>
-					{/* <input type='email' id='email' placeholder='Email' ref={...register('email', { required: true })} /> */}
-					<input type='email' id='email' placeholder='Email' />
-				</div>
-				<div>
-					<label htmlFor='password'>Password</label>
-					{/* <input type='password' id='password' name='password' placeholder='Password' inputRef={ref} ref={register({ required: true })} /> */}
-					<input type='password' id='password' name='password' placeholder='Password' />
-				</div>
-
-				<button type='submit'>Sign in</button>
-			</form>
+			<FormStyle>
+				{/* <FormStyle onSubmit={handleSubmit(_onSubmit)}> */}
+					<FormLine
+						renderLabel={() => <Label htmlFor='email'>Email</Label>}
+						renderInput={() => <Input
+							type='email'
+							id='email'
+							placeholder='Email'
+							// forwardedref={...register('email', { required: true })}
+							autocomplete="email"
+						/>}
+					/>
+					<FormLine
+						renderLabel={() => <Label htmlFor='password'>Password</Label>}
+						renderInput={() => <Input
+							type='password'
+							id='password'
+							name='password'
+							placeholder='Password'
+							forwardedref={register({ required: true })}
+							autocomplete="current-password"
+						/>}
+					/>
+					<button type='submit'>Sign in</button>
+				</FormStyle>
 		</>
-	)
+			)
 }
 
 export default LoginForm;

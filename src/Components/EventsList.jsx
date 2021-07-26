@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { getEvents } from '../API/getAllEvents';
 import { FILTER } from '../Config/constants';
 import EventCard from './EventCard';
-import Avatar from './Avatar';
+import Layout from './Layout';
 
 const Events = () => {
 	const [events, setEvents] = useState([])
@@ -64,15 +64,14 @@ const Events = () => {
 	}, [filterBy, events])
 
 	return (
-		<div>
+			<Layout>
 			<button type='button' onClick={_handleFilterChange} value={FILTER.ALL}>ALL</button>
 			<button type='button' onClick={_handleFilterChange} value={FILTER.FUTURE}>FUTURE</button>
 			<button type='button' onClick={_handleFilterChange} value={FILTER.PAST}>PAST</button>
 			{isEventLoading ? 'TODO LOADING' :
 				filteredEvents.map(event => <EventCard key={event.id} data={event} />)
 			}
-			<Avatar />
-		</div>
+		</Layout>
 	)
 }
 

@@ -6,10 +6,12 @@ import Login from './Components/Login';
 import Events from './Components/EventsList';
 import LoginWrapper from './Components/LogginWrapper';
 import { UserProvider } from './Context/userContext';
+import GlobalStyles from './Styles/globalStyled';
 
 const App = () => {
   return (
     <UserProvider>
+      <GlobalStyles />
       <LoginWrapper>
         <Switch>
           <Route
