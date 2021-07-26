@@ -2,7 +2,7 @@ import React from 'react';
 
 import Logo from './Logo';
 import { Wrapper, LeftSide, RightSide, SignUp, BottomText, BottomWrap, Separator } from '../Styles/PublicPageMaquetteStyled';
-import { Text, Link } from '../Styles/Typography';
+import { SpanText, Link } from '../Styles/Typography';
 
 const PublicPageMaquette = ({ children }) => {
 	return (
@@ -12,13 +12,13 @@ const PublicPageMaquette = ({ children }) => {
 					<BottomWrap>
 						<BottomText>“Great, kid.Don’t <br />get cocky.”</BottomText>
 						<Separator />
-						<Text>Han Solo</Text>
+						<SpanText>Han Solo</SpanText>
 					</BottomWrap>
 			</LeftSide>
 
 			<RightSide>
 				<SignUp>
-					<Text>Don’t have account?</Text>
+					<SpanText>Don’t have account?</SpanText>
 					<Link href='#'> SIGN UP</Link>
 				</SignUp>
 

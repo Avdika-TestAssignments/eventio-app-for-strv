@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { userContext } from '../Context/userContext';
-import { Image } from '../Styles/LogoStyled';
+import { LogoImage } from '../Styles/LogoStyled';
 
 const Logo = () => {
 	const { state } = useContext(userContext)
@@ -11,7 +11,7 @@ const Logo = () => {
 
 	return (
 		<div>
-			<img src={`/icon/${logoPath}.svg`} alt='svg'/>
+			<LogoImage src={`/icon/${logoPath}.svg`} alt='svg'/>
 		</div>
 	)
 }

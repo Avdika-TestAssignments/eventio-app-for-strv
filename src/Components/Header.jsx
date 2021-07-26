@@ -10,7 +10,7 @@ const Header = () => {
 	const { isLogged } = state
 
 	const _renderAvatar = () => <Avatar />
-	const _renderSignUp = () => <a href='todo'>Don't have account? SIGN UP</a>
+	const _renderSignUp = () => <a href='todo'>Don&apos;t have account? SIGN UP</a>
 
 	return (
 		<HeaderWrap>

@@ -12,29 +12,22 @@ const Events = () => {
 	const [isEventLoading, setEventLoading] = useState(false)
 
 	useEffect(() => {
-		let isSubscribed = true
 
 		const fetchData = async () => {
 			setEventLoading(true)
 
 			const events = await getEvents()
 
-			if (isSubscribed) {
-				setEvents(events)
-				setFilteredEvents(events)
-				setEventLoading(false)
-			}
+			setEvents(events)
+			setFilteredEvents(events)
+			setEventLoading(false)
 		}
 
 		fetchData()
 
-		// eslint-disable-next-line no-return-assign
-		return () => isSubscribed = false
 	}, [])
 
 	const [filterBy, setFilterBy] = useState(FILTER.ALL)
-
-
 
 	const _handleFilterChange = (event) => {
 		setFilterBy(event.target.value)
@@ -64,7 +57,7 @@ const Events = () => {
 	}, [filterBy, events])
 
 	return (
-			<Layout>
+		<Layout>
 			<button type='button' onClick={_handleFilterChange} value={FILTER.ALL}>ALL</button>
 			<button type='button' onClick={_handleFilterChange} value={FILTER.FUTURE}>FUTURE</button>
 			<button type='button' onClick={_handleFilterChange} value={FILTER.PAST}>PAST</button>

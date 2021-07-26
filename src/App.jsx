@@ -1,27 +1,28 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import { ROUTES } from './Config/routes';
 import Login from './Components/Login';
 import Events from './Components/EventsList';
-import LoginWrapper from './Components/LogginWrapper';
+import LoginManager from './Components/LogginManager';
 import { UserProvider } from './Context/userContext';
+import PrivateRoute from './Components/PrivateRoute';
+import PublicRoute from './Components/PublicRoute';
 import GlobalStyles from './Styles/globalStyled';
 
 const App = () => {
   return (
     <UserProvider>
       <GlobalStyles />
-      <LoginWrapper>
+      <LoginManager>
         <Switch>
-          <Route
-            path={[ROUTES.HOMEPAGE, ROUTES.LOGIN]}
+          <PublicRoute path={[ROUTES.HOMEPAGE, ROUTES.LOGIN]}
             component={Login}
             exact
           />
-          <Route path={ROUTES.EVENTS} component={Events} />
+          <PrivateRoute path={ROUTES.EVENTS} component={Events} />
         </Switch>
-      </LoginWrapper>
+      </LoginManager>
     </UserProvider>
   );
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const Image = styled.img`
+export const LogoImage = styled.img`
   vertical-align: bottom;
 `

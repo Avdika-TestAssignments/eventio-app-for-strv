@@ -9,7 +9,7 @@ export const StyledInput = styled.input.attrs(props => ({
 	border-bottom: 1px solid ${theme.color.lightest};
 	width: 100%;
 	color: ${theme.color.dark};
-	padding: .5rem;
+	padding: .5rem 0;
 	font-size: ${theme.fontSize.normal};
 	outline: none;
 	&::placeholder {
