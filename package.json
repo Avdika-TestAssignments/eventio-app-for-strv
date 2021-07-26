@@ -6,8 +6,10 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "mutationobserver-shim": "^0.3.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.12.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.0"
@@ -17,12 +19,12 @@
     "build": "react-scripts build",
     "test": "CI=true react-scripts test",
     "eject": "react-scripts eject",
-    "prettier-format": "prettier --write src/*.js",
-    "lint": "eslint --fix src/*.js"
+    "prettier-format": "prettier --write src/**/*.js",
+    "lint": "eslint --fix src/**/*.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run prettier-format && npm run test"
+      "pre-commit": "npm run lint && npm run prettier-format && npm run test && git add ."
     }
   },
   "eslintConfig": {
@@ -47,11 +49,12 @@
     ]
   },
   "devDependencies": {
-    "@strv/prettier-config": "^1.0.3",
     "@strv/eslint-config-react": "^3.1.2",
+    "@strv/prettier-config": "^1.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^7.0.1",
     "prettier": "^2.3.2"
   }
