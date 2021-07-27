@@ -4,7 +4,7 @@ import { Spinner } from '../Styles/LoaderStyled';
 
 const Loader = () => {
 	return (
-		<Spinner src='/icon/loader.svg' alt='loader' />
+		<Spinner src='../src/Images/loader.png' alt='loader' />
 	)
 }
 

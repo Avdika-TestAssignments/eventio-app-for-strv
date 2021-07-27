@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { ROUTES } from './Config/routes';
 import Login from './Components/Login';
@@ -8,6 +8,7 @@ import LoginManager from './Components/LogginManager';
 import { UserProvider } from './Context/userContext';
 import PrivateRoute from './Components/PrivateRoute';
 import PublicRoute from './Components/PublicRoute';
+import NotFound from './Components/NotFound';
 import GlobalStyles from './Styles/globalStyled';
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
             exact
           />
           <PrivateRoute path={ROUTES.EVENTS} component={Events} />
+          <Route component={NotFound} />
         </Switch>
       </LoginManager>
     </UserProvider>

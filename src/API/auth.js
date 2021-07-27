@@ -22,8 +22,9 @@ const refreshAuthToken = async (refreshToken) => {
 
 		storeAuthToken(authToken)
 		const apiData = await response.json()
+		console.log('__apiData ', apiData);
 		const appData = transformData(apiData)
-
+		console.log('__appData ', appData);
 		return appData
 	}
 }

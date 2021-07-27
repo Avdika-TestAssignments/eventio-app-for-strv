@@ -54,3 +54,8 @@ export const Separator = styled.div`
 	height: 0.125rem;
 	background-color: ${theme.color.green};
 `
+
+export const Content = styled.div`
+	text-align: left;
+	width: 50%;
+`

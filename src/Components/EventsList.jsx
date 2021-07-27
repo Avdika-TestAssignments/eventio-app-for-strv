@@ -5,11 +5,17 @@ import { getEvents } from '../API/getAllEvents';
 import { FILTER } from '../Config/constants';
 import EventCard from './EventCard';
 import Layout from './Layout';
+import EventForm from './NewEventForm';
+import { Content } from '../Styles/EventListStyled';
+import Loader from './Loader';
+import LinkButton from './LinkButton';
+import Popup from './Popup';
 
 const Events = () => {
 	const [events, setEvents] = useState([])
 	const [filteredEvents, setFilteredEvents] = useState([])
 	const [isEventLoading, setEventLoading] = useState(false)
+	const [showCreateForm, setShowCreateForm] = useState(false)
 
 	useEffect(() => {
 
@@ -56,14 +62,48 @@ const Events = () => {
 
 	}, [filterBy, events])
 
+	const _onEventCreated = (data) => {
+		setEvents([...events, data])
+		setShowCreateForm(false)
+	}
+
 	return (
 		<Layout>
-			<button type='button' onClick={_handleFilterChange} value={FILTER.ALL}>ALL</button>
-			<button type='button' onClick={_handleFilterChange} value={FILTER.FUTURE}>FUTURE</button>
-			<button type='button' onClick={_handleFilterChange} value={FILTER.PAST}>PAST</button>
-			{isEventLoading ? 'TODO LOADING' :
-				filteredEvents.map(event => <EventCard key={event.id} data={event} />)
-			}
+			<Content>
+				<LinkButton
+					isActive={filterBy === FILTER.ALL}
+					type='button' onClick={_handleFilterChange}
+					value={FILTER.ALL}
+				>
+					all events
+				</LinkButton>
+
+				<LinkButton
+					isActive={filterBy === FILTER.FUTURE}
+					type='button' onClick={_handleFilterChange}
+					value={FILTER.FUTURE}
+				>
+					future events
+				</LinkButton>
+
+				<LinkButton
+					isActive={filterBy === FILTER.PAST}
+					type='button'
+					onClick={_handleFilterChange}
+					value={FILTER.PAST}
+				>
+					past events
+				</LinkButton>
+				{isEventLoading ? <Loader /> :
+					filteredEvents.map(event => <EventCard key={event.id} data={event} />)
+				}
+				<button type='button' onClick={() => setShowCreateForm(true)}>New event</button>
+				{showCreateForm &&
+					<Popup onClose={() => setShowCreateForm(false)}>
+						<EventForm onCreateEvent={(data) => _onEventCreated(data)} />
+					</Popup>
+				}
+			</Content>
 		</Layout>
 	)
 }

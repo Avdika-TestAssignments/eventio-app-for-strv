@@ -1,6 +1,6 @@
  const theme = {
   color: {
-    white: '#ffffff',
+    white: '#FFFFFF',
     dark: '#323C46',
     light: '#949EA8',
     lightest: '#DAE1E7',
@@ -9,6 +9,7 @@
   },
 
   fontSize: {
+    small: '.875rem',
     normal: '1rem',
     big: '1.75rem',
     poster: '2.25rem',

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getRefreshToken } from '../API/refreshToken';
 import { refreshAuthToken } from '../API/auth';
 import { userContext } from '../Context/userContext';
+import Loader from './Loader';
 
 const Loginmanager = (props) => {
 	const [readyToRender, setReadyToRender] = useState(false)
@@ -28,7 +29,7 @@ const Loginmanager = (props) => {
 
 	return (
 		<>
-			{readyToRender ? props.children : <div>Loading</div>}
+			{readyToRender ? props.children : <Loader />}
 		</>
 	)
 }

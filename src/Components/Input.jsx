@@ -3,13 +3,25 @@ import PropTypes from 'prop-types';
 
 import { StyledInput } from '../Styles/InputStyled';
 
-const Input = (props) => <StyledInput ref={props.forwardedref} {...props} />
+const Input = (props) => <StyledInput {...props.forwardedref} {...props} />
 
 Input.propTypes = {
   forwardedref: PropTypes.object.isRequired
 }
 
 export default Input;
+
+
+
+
+
+
+// const { ref, ...rest } = register('value_name')
+
+
+// return (
+//  <TextField inputRef={red} {...rest} />
+// )
 
 // const WrappedComponent = React.forwardRef(
 //   function myFunction(props, ref) {

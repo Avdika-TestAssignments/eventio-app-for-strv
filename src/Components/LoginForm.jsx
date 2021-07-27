@@ -18,6 +18,7 @@ const LoginForm = () => {
 	const [isSending, setIsSending] = useState(false)
 	const { dispatch } = useContext(userContext)
 	const { register, handleSubmit } = useForm();
+
 	const _onSubmit = async (data) => {
 
 		try {
@@ -35,8 +36,6 @@ const LoginForm = () => {
 			setIsSending(false)
 		}
 	}
-
-
 
 	return (
 		<>

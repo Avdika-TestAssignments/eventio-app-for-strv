@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Logo from './Logo';
-import { Wrapper, LeftSide, RightSide, SignUp, BottomText, BottomWrap, Separator } from '../Styles/PublicPageMaquetteStyled';
+import { Wrapper, LeftSide, RightSide, SignUp, BottomText, BottomWrap, Separator, Content } from '../Styles/PublicPageMaquetteStyled';
 import { SpanText, Link } from '../Styles/Typography';
 
 const PublicPageMaquette = ({ children }) => {
@@ -10,11 +10,11 @@ const PublicPageMaquette = ({ children }) => {
 		<Wrapper>
 			<LeftSide>
 				<Logo />
-					<BottomWrap>
-						<BottomText>“Great, kid.Don’t <br />get cocky.”</BottomText>
-						<Separator />
-						<SpanText>Han Solo</SpanText>
-					</BottomWrap>
+				<BottomWrap>
+					<BottomText>“Great, kid.Don’t <br />get cocky.”</BottomText>
+					<Separator />
+					<SpanText>Han Solo</SpanText>
+				</BottomWrap>
 			</LeftSide>
 
 			<RightSide>
@@ -22,15 +22,16 @@ const PublicPageMaquette = ({ children }) => {
 					<SpanText>Don’t have account?</SpanText>
 					<Link href='#'> SIGN UP</Link>
 				</SignUp>
-
-				{children}
+				<Content>
+					{children}
+				</Content>
 			</RightSide>
 		</Wrapper>
 	)
 }
 
 PublicPageMaquette.propTypes = {
-  children: PropTypes.array.isRequired
+	children: PropTypes.array.isRequired
 }
 
 export default PublicPageMaquette;

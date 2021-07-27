@@ -6,7 +6,7 @@ export const transformData = (data) => {
 		startsAt: data.startsAt || null,
 		capacity: data.capacity || 0,
 		owner: {
-			id: data.id || null,
+			id: data.owner.id || null,
 			firstName: data.owner.firstName || '',
 			lastName: data.owner.lastName || ''
 		},
@@ -34,4 +34,8 @@ export const dateFormat = (date = null) => {
 
     return `${month} ${day}, ${year} - ${time}`
   } else return null
+}
+
+export const createDateFormat = (date = '', time = '') => {
+  return `${date}T${time}Z`
 }

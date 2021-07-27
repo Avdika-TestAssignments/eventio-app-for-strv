@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { transformData, attendeesAmount } from '../Config/dataFormat';
+import { dateFormat, attendeesAmount } from '../Config/dataFormat';
 import { userContext } from '../Context/userContext';
 import { joinEvent, leaveEvent } from '../API/getAllEvents';
+import Button from './Button';
+import { Card, Item } from '../Styles/EventCardStyled';
 
 const EVENT_STATUS = {
 	JOINED: 'JOIN',
@@ -11,9 +13,15 @@ const EVENT_STATUS = {
 	OWNER: 'EDIT'
 }
 
+const BUTTON_COLORS = {
+	[EVENT_STATUS.JOINED]: Button.getTypes().COLOR.PRIMARY,
+	[EVENT_STATUS.LEFT]: Button.getTypes().COLOR.SECONDARY,
+	[EVENT_STATUS.OWNER]: Button.getTypes().COLOR.THIRD
+}
+
 const EventCard = ({ data }) => {
 	const [eventActionLoading, setEventActionLoading] = useState(false)
-	const [eventStatus, setEventStatus] = useState()
+	const [eventStatus, setEventStatus] = useState('')
 
 	const { state } = useContext(userContext)
 	const { id } = state
@@ -64,22 +72,27 @@ const EventCard = ({ data }) => {
 		setEventActionLoading(false)
 	}
 	return (
-		<div>
-			{title}
-			{description}
-			{firstName}
-			{lastName}
-			{attendeesAmount(attendees.length, capacity)}
-			{transformData(startsAt)}
-			<button type='button' onClick={_eventAction}>
-				{eventActionLoading ? 'LOADING' : eventStatus}
-			</button>
-		</div>
+		<Card>
+			<Item>{title}</Item>
+			<Item>{description}</Item>
+			<Item>{firstName} {lastName}</Item>
+			<Item>{dateFormat(startsAt)}</Item>
+			<Item>{attendeesAmount(attendees.length, capacity)}</Item>
+			<Button
+				isLoading={eventActionLoading}
+				size={Button.getTypes().SIZE.SMALL}
+				color={BUTTON_COLORS[eventStatus]}
+				type='button'
+				onClick={_eventAction}
+			>
+				{eventStatus}
+			</Button>
+		</Card>
 	)
 }
 
 EventCard.propTypes = {
-  data: PropTypes.object.isRequired
+	data: PropTypes.object.isRequired
 }
 
 export default EventCard;

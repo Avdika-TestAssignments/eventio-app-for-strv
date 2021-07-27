@@ -13,6 +13,7 @@ export const FILTER = {
  export const HTTP_STATUS = {
   OK: 200,
   UNAUTHORIZED: 401,
+  CREATED: 201,
 }
 
 export const TOKEN = {
