@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { transformData, attendeesAmount } from '../Config/dataFormat';
 import { userContext } from '../Context/userContext';
@@ -75,6 +76,10 @@ const EventCard = ({ data }) => {
 			</button>
 		</div>
 	)
+}
+
+EventCard.propTypes = {
+  data: PropTypes.object.isRequired
 }
 
 export default EventCard;

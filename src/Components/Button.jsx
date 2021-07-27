@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { StyledButton } from '../Styles/buttonStyled';
 import Loader from './Loader';
@@ -11,6 +12,12 @@ const Button = (props) => {
 			{!isLoading ? <Loader /> : children}
 		</StyledButton>
 	)
+}
+
+Button.propTypes = {
+  type: PropTypes.string.isRequired,
+	isLoading: PropTypes.bool.isRequired,
+	children: PropTypes.object.isRequired
 }
 
 Button.getTypes = () => {

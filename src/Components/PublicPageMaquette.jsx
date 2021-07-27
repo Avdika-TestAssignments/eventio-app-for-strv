@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Logo from './Logo';
 import { Wrapper, LeftSide, RightSide, SignUp, BottomText, BottomWrap, Separator } from '../Styles/PublicPageMaquetteStyled';
@@ -26,6 +27,10 @@ const PublicPageMaquette = ({ children }) => {
 			</RightSide>
 		</Wrapper>
 	)
+}
+
+PublicPageMaquette.propTypes = {
+  children: PropTypes.array.isRequired
 }
 
 export default PublicPageMaquette;

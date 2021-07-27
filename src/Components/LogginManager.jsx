@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { getRefreshToken } from '../API/refreshToken';
 import { refreshAuthToken } from '../API/auth';
@@ -30,6 +31,10 @@ const Loginmanager = (props) => {
 			{readyToRender ? props.children : <div>Loading</div>}
 		</>
 	)
+}
+
+Loginmanager.propTypes = {
+  children: PropTypes.object.isRequired
 }
 
 export default Loginmanager;

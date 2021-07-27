@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/forbid-dom-props */
-import React, { useState, useContext, forwardRef } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from "react-hook-form";
 
 import { userLogin } from '../API/auth';

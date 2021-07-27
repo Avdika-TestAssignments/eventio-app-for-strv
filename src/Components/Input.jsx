@@ -10,3 +10,23 @@ Input.propTypes = {
 }
 
 export default Input;
+
+// const WrappedComponent = React.forwardRef(
+//   function myFunction(props, ref) {
+//     return <LogProps {...props} forwardedRef={ref} />;
+//   }
+// );
+
+// const WrappedComponent = React.forwardRef((props, ref) => {
+//   return <LogProps {...props} forwardedRef={ref} />;
+// });
+// ==========================================
+// const FancyButton = React.forwardRef((props, ref) => (
+//   <button ref={ref} className="FancyButton">
+//     {props.children}
+//   </button>
+// ));
+
+// // You can now get a ref directly to the DOM button:
+// const ref = React.createRef();
+// <FancyButton ref={ref}>Click me!</FancyButton>;
