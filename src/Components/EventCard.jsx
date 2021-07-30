@@ -5,25 +5,19 @@ import { dateFormat, attendeesAmount } from '../Config/dataFormat';
 import { userContext } from '../Context/userContext';
 import { joinEvent, leaveEvent } from '../API/getAllEvents';
 import Button from './Button';
-import { Card, Item } from '../Styles/EventCardStyled';
-
-const EVENT_STATUS = {
-	JOINED: 'JOIN',
-	LEFT: 'LEAVE',
-	OWNER: 'EDIT'
-}
+import { Card, Item } from '../Styles/eventCardStyled';
+import { EVENT_STATUS } from '../Config/constants';
 
 const BUTTON_COLORS = {
 	[EVENT_STATUS.JOINED]: Button.getTypes().COLOR.PRIMARY,
 	[EVENT_STATUS.LEFT]: Button.getTypes().COLOR.SECONDARY,
-	[EVENT_STATUS.OWNER]: Button.getTypes().COLOR.THIRD
+	[EVENT_STATUS.OWNER]: Button.getTypes().COLOR.NORMAL
 }
 
 const EventCard = ({ data }) => {
-	const [eventActionLoading, setEventActionLoading] = useState(false)
-	const [eventStatus, setEventStatus] = useState('')
-
-	const { state } = useContext(userContext)
+	const [eventActionLoading, setEventActionLoading] = useState(false);
+	const [eventStatus, setEventStatus] = useState('');
+	const { state } = useContext(userContext);
 	const { id } = state
 
 	const {
@@ -43,34 +37,42 @@ const EventCard = ({ data }) => {
 	useEffect(() => {
 		// logged user is owner of event
 		if (id === ownerId) {
-			setEventStatus(EVENT_STATUS.OWNER)
-
+			setEventStatus(EVENT_STATUS.OWNER);
 		} else if (attendees.find(attendee => attendee.id === id)) {
 			//logged user has already join event
-			setEventStatus(EVENT_STATUS.LEFT)
-
+			setEventStatus(EVENT_STATUS.LEFT);
 		} else {
 			//user is not attendee and not event owner
-			setEventStatus(EVENT_STATUS.JOINED)
+			setEventStatus(EVENT_STATUS.JOINED);
 		}
-	}, [id, attendees, ownerId])
+	}, [id, attendees, ownerId]);
 
-	const _eventAction = async () => {
-		setEventActionLoading(true)
+	const eventClick = async (e) => {
+		e.stopPropagation();
+		setEventActionLoading(true);
 
 		//try to join event
 		if (eventStatus === EVENT_STATUS.JOINED) {
-			await joinEvent(eventId)
-			setEventStatus(EVENT_STATUS.LEFT)
-
+			await joinEvent(eventId);
+			setEventStatus(EVENT_STATUS.LEFT);
 		} else if (eventStatus === EVENT_STATUS.LEFT) {
 			//try to leave event
-			await leaveEvent(eventId)
-			setEventStatus(EVENT_STATUS.JOINED)
+			await leaveEvent(eventId);
+			setEventStatus(EVENT_STATUS.JOINED);
 		}
-
-		setEventActionLoading(false)
+		setEventActionLoading(false);
 	}
+
+	const eventDate = new Date(startsAt);
+	const actualDate = new Date();
+
+	const disableButton =
+		actualDate > eventDate &&
+		(eventStatus === EVENT_STATUS.JOINED || eventStatus === EVENT_STATUS.LEFT);
+
+	const fullCapacity =
+		eventStatus === EVENT_STATUS.JOINED && attendees.length === capacity;
+
 	return (
 		<Card>
 			<Item>{title}</Item>
@@ -79,11 +81,12 @@ const EventCard = ({ data }) => {
 			<Item>{dateFormat(startsAt)}</Item>
 			<Item>{attendeesAmount(attendees.length, capacity)}</Item>
 			<Button
+				disabled={disableButton || fullCapacity}
 				isLoading={eventActionLoading}
 				size={Button.getTypes().SIZE.SMALL}
 				color={BUTTON_COLORS[eventStatus]}
 				type='button'
-				onClick={_eventAction}
+				onClick={eventClick}
 			>
 				{eventStatus}
 			</Button>

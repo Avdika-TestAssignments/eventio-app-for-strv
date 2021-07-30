@@ -1,8 +1,7 @@
-
 import { getAuthToken } from '../API/authToken';
 import { SETTINGS } from './settings';
 
-const _getApiHeaders = (token) => {
+const apiHeaders = (token) => {
 	return {
 		headers: {
 			apiKey: SETTINGS.API_KEY,
@@ -13,12 +12,12 @@ const _getApiHeaders = (token) => {
 }
 
 const fetchData = async (url = '', options = {}) => {
-	const requestOptions = Object.assign(_getApiHeaders(getAuthToken()), {
+	const requestOptions = Object.assign(apiHeaders(getAuthToken()), {
 		...options,
 	})
 
-	const response = await fetch(url, requestOptions)
-	return response
+	const response = await fetch(url, requestOptions);
+	return response;
 }
 
 export { fetchData };

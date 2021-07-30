@@ -2,58 +2,55 @@ import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 import PropTypes from 'prop-types';
 
-import { Title, Subtitle } from '../Styles/Typography';
+import { Title, Subtitle } from '../Styles/typography';
 import Input from './Input'
 import Label from './Label'
 import FormLine from './FormLine'
 import Button from './Button';
-import { StyledButton } from '../Styles/NewEventFormStyled';
+import { StyledButton } from '../Styles/newEventFormStyled';
 import { createEvent } from '../API/getAllEvents';
-import { createDateFormat } from '../Config/dataFormat';
+import { createDateFormat, getTodayDate } from '../Config/dataFormat';
 
-const EventForm = ({onCreateEvent = () => {}}) => {
+const BUTTON_COLOR = {
+	PRIMARY: Button.getTypes().COLOR.PRIMARY
+}
+
+const EventForm = ({ onCreateEvent = () => { } }) => {
 	const { register, handleSubmit } = useForm();
-	const [ isSending, setIsSending ] = useState(false)
-	const [, setCreateError ] = useState(false)
+	const [isSending, setIsSending] = useState(false);
 
-	const _onSubmit = async (data) => {
-		setCreateError(false)
-		setIsSending(true)
+	const submitData = async (data) => {
+		setIsSending(true);
 
 		try {
-			const ev = await createEvent({
+			const eventCreation = await createEvent({
 				title: data.title,
 				description: data.description,
 				startsAt: createDateFormat(data.date, data.time),
 				capacity: data.capacity
 			})
-
-			onCreateEvent(ev)
-		} catch {
-			setCreateError(true)
-
-		} finally {
-			setIsSending(false)
+			onCreateEvent(eventCreation);
 		}
-	}
-
-	const _getDateFromNow = () => {
-		return new Date().toISOString().split("T")[0]
+		finally {
+			setIsSending(false);
+		}
 	}
 
 	return (
 		<>
 			<Title>Create new event</Title>
 			<Subtitle>Enter detail below.</Subtitle>
+			<form onSubmit={handleSubmit(submitData)}>
 
-			<form onSubmit={handleSubmit(_onSubmit)}>
 				<FormLine
 					renderLabel={() => <Label htmlFor='name'>Title</Label>}
 					renderInput={() => <Input
 						type='text'
 						id='name'
 						placeholder='Title'
-						forwardedref={{...register('title', { required: true })}}
+						forwardedref={{ ...register('title', { required: true }) }}
+						// hasError={errors.title}
+						errorMsg="Title has to be filled up"
 					/>}
 				/>
 
@@ -63,7 +60,9 @@ const EventForm = ({onCreateEvent = () => {}}) => {
 						type='text'
 						id='desc'
 						placeholder='Description'
-						forwardedref={{...register('description', { required: true })}}
+						forwardedref={{ ...register('description', { required: true }) }}
+						// hasError={errors.description}
+						errorMsg="Description has to be filled up"
 					/>}
 				/>
 
@@ -72,9 +71,11 @@ const EventForm = ({onCreateEvent = () => {}}) => {
 					renderInput={() => <Input
 						type='date'
 						id='date'
-						min={_getDateFromNow()}
+						min={getTodayDate()}
 						placeholder='Date'
-						forwardedref={{...register('date', { required: true })}}
+						forwardedref={{ ...register('date', { required: true }) }}
+						// hasError={errors.date}
+						errorMsg="Please choose some date"
 					/>}
 				/>
 
@@ -84,7 +85,9 @@ const EventForm = ({onCreateEvent = () => {}}) => {
 						type='time'
 						id='time'
 						placeholder='Time'
-						forwardedref={{...register('time', { required: true })}}
+						forwardedref={{ ...register('time', { required: true }) }}
+						// hasError={errors.time}
+						errorMsg="Please pick time"
 					/>}
 				/>
 
@@ -94,23 +97,24 @@ const EventForm = ({onCreateEvent = () => {}}) => {
 						type='number'
 						id='capacity'
 						placeholder='Capacity'
-						forwardedref={{...register('capacity', { required: true })}}
+						forwardedref={{ ...register('capacity', { required: true }) }}
+						// hasError={errors.capacity}
+						errorMsg="Capacity has to be filled up"
 					/>}
 				/>
-			<StyledButton
-				isLoading={isSending}
-				type='submit'
-				color={Button.getTypes().COLOR.PRIMARY}>
+				<StyledButton
+					isLoading={isSending}
+					type='submit'
+					color={BUTTON_COLOR.PRIMARY}>
 					Create new event
-			</StyledButton>
+				</StyledButton>
 			</form>
 		</>
 	)
-
 }
 
 EventForm.propTypes = {
-  onCreateEvent: PropTypes.func.isRequired
+	onCreateEvent: PropTypes.func.isRequired
 }
 
 export default EventForm;

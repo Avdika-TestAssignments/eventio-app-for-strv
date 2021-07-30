@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Content } from '../Styles/PrivatePageMaquetteStyled';
+import { Wrapper, Content } from '../Styles/privatePageMaquetteStyled';
 import Header from './Header';
 
-const PrivatePageLayout = ({ children }) => {
+const PrivatePageMaquette = ({ children }) => {
 	return (
 		<Wrapper>
 			<Header />
@@ -15,8 +15,8 @@ const PrivatePageLayout = ({ children }) => {
 	)
 }
 
-PrivatePageLayout.propTypes = {
-  children: PropTypes.object.isRequired
+PrivatePageMaquette.propTypes = {
+  children: PropTypes.array.isRequired
 }
 
-export default PrivatePageLayout;
+export default PrivatePageMaquette;

@@ -5,28 +5,28 @@ import { userContext } from '../Context/userContext';
 import PublicPageMaquette from './PublicPageMaquette';
 import PrivatePageMaquette from './PrivatePageMaquette';
 
-const _renderPublicPage = ({children}) => {
+const renderPublicSession = ({children}) => {
 	return <PublicPageMaquette> {children} </PublicPageMaquette>
 }
 
-_renderPublicPage.propTypes = {
+renderPublicSession.propTypes = {
   children: PropTypes.object.isRequired
 }
 
-const _renderPrivatePage = ({children}) => {
+const renderPrivateSession = ({children}) => {
 	return <PrivatePageMaquette> {children} </PrivatePageMaquette>
 }
 
-_renderPrivatePage.propTypes = {
+renderPrivateSession.propTypes = {
   children: PropTypes.object.isRequired
 }
 
 const Layout = ({ children }) => {
-	const { state } = useContext(userContext)
-	const { isLogged } = state
+	const { state } = useContext(userContext);
+	const { isLogged } = state;
 	return (
 		<>
-			{isLogged ? _renderPrivatePage({children}) : _renderPublicPage({children})}
+			{isLogged ? renderPrivateSession({children}) : renderPublicSession({children})}
 		</>
 	)
 }

@@ -1,9 +1,12 @@
 import { TOKEN } from "../Config/constants";
+import { browserCheck } from '../Config/browserCheck';
 
-const storeRefreshToken = (refreshToken = '') => {
-  window.localStorage.setItem([TOKEN.REFRESH_TOKEN], refreshToken)
+const storeRefreshToken = (refreshToken) => {
+  if (browserCheck()) {
+    window.localStorage.setItem(TOKEN.REFRESH_TOKEN, refreshToken);
+  }
 }
 
-const getRefreshToken = () => window.localStorage.getItem([TOKEN.REFRESH_TOKEN])
+const getRefreshToken = () => browserCheck() ? window.localStorage.getItem(TOKEN.REFRESH_TOKEN) || '' : '';
 
 export { storeRefreshToken, getRefreshToken };

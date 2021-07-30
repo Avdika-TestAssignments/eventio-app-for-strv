@@ -5,7 +5,7 @@ import { storeAuthToken } from "../API/authToken";
 const userReducer = (state, action) => {
 	switch (action.type) {
 		case 'LOGIN': {
-			const { id, firstName, lastName, email } = action.payload
+			const { id, firstName, lastName, email } = action.payload;
 
 			return {
 				...state,
@@ -17,8 +17,8 @@ const userReducer = (state, action) => {
 			}
 		}
 		case 'LOGOUT':
-			storeRefreshToken()
-			storeAuthToken()
+			storeRefreshToken('');
+			storeAuthToken('');
 
 			return {
 				...state,
@@ -26,7 +26,7 @@ const userReducer = (state, action) => {
 			}
 
 		default:
-			return state
+			return state;
 	}
 }
 

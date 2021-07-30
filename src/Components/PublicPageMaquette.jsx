@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Logo from './Logo';
-import { Wrapper, LeftSide, RightSide, SignUp, BottomText, BottomWrap, Separator, Content } from '../Styles/PublicPageMaquetteStyled';
-import { SpanText, Link } from '../Styles/Typography';
+import AppLogo from './AppLogo';
+import { Wrapper, LeftSide, RightSide, SignUp, BottomText, BottomWrap, Separator, Content } from '../Styles/publicPageMaquetteStyled';
+import { SpanText, Link } from '../Styles/typography';
 
 const PublicPageMaquette = ({ children }) => {
 	return (
 		<Wrapper>
 			<LeftSide>
-				<Logo />
+				<AppLogo />
 				<BottomWrap>
 					<BottomText>“Great, kid.Don’t <br />get cocky.”</BottomText>
 					<Separator />

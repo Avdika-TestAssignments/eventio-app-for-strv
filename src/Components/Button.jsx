@@ -11,10 +11,10 @@ const Button = (props) => {
 		isLoading = false,
 		children = {},
 		size = Button.getTypes().SIZE.BIG
-	} = props
+	} = props;
 
 	const ComponentButton = size === Button.getTypes().SIZE.BIG ?
-		BigButton : SmallButton
+		BigButton : SmallButton;
 
 	return(
 		<ComponentButton  color type={type} {...props}>
@@ -26,8 +26,12 @@ const Button = (props) => {
 Button.propTypes = {
   type: PropTypes.string.isRequired,
 	isLoading: PropTypes.bool.isRequired,
-	children: PropTypes.object.isRequired,
-	size: PropTypes.string.isRequired
+	children: PropTypes.string.isRequired,
+	size: PropTypes.string
+}
+
+Button.defaultProps = {
+	size: 'big'
 }
 
 Button.getTypes = () => {
@@ -35,6 +39,7 @@ Button.getTypes = () => {
 		COLOR: {
 			PRIMARY: theme.color.green,
 			SECONDARY: theme.color.pink,
+			NORMAL: theme.color.normal,
 			THIRD: theme.color.dark
 		},
 		SIZE: {

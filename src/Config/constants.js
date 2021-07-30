@@ -20,3 +20,14 @@ export const TOKEN = {
   AUTH_TOKEN: 'authorization-token',
   REFRESH_TOKEN: 'refresh-token',
 }
+
+export const EVENT_STATUS = {
+	JOINED: 'JOIN',
+	LEFT: 'LEAVE',
+	OWNER: 'EDIT'
+}
+
+export const EVENTS_VIEW_MODE = {
+	LIST: 'list',
+	CARDS: 'card',
+}

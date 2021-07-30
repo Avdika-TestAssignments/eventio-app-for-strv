@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '../Styles/theme';
+import theme from './theme';
 
 export const SpanText = styled.span`
 	font-size: ${theme.fontSize.normal};

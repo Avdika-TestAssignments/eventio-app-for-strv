@@ -1,19 +1,21 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Title } from '../Styles/Typography';
+import { Title } from '../Styles/typography';
 import PublicPageMaquette from './PublicPageMaquette';
-import { StyledButton, TitleText, NFImage } from '../Styles/NotFoundStyled';
+import { StyledButton, TitleText, NFImage } from '../Styles/notFoundStyled';
 import Button from './Button';
 import { ROUTES } from '../Config/routes';
-
+import errorImage from '../Images/NotFoundIcon.png';
 
 const NotFound = () => {
-	const historyStore = useHistory()
+	const historyStore = useHistory();
+
+	const redirectHome = () => historyStore.push(ROUTES.HOMEPAGE);
 
 	return (
 		<PublicPageMaquette>
-			<NFImage src='/img/darthvader.svg' alt='i am your father' />
+			<NFImage src={errorImage} alt='trooper is watching you' />
 
 			<Title>404 Error - page not found</Title>
 			<TitleText>
@@ -22,8 +24,9 @@ const NotFound = () => {
 			</TitleText>
 
 			<StyledButton
+				size = {Button.getTypes().SIZE.BIG}
 				color={Button.getTypes().COLOR.THIRD}
-				onClick={() => historyStore.push(ROUTES.HOMEPAGE)}
+				onClick={redirectHome}
 			>
 				Return home
 			</StyledButton>

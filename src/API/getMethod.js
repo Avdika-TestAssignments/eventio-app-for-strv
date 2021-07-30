@@ -1,17 +1,16 @@
 import { SETTINGS } from '../Config/settings';
 import { fetchData } from '../Config/fetch';
 
-// eslint-disable-next-line no-unused-vars
 const get = async (url = '', options = {}) => {
 	const requestOptions = Object.assign({
 		method: 'GET',
 	},
-		{ ...options })
+		{ ...options });
 
-	const reponse = await fetchData(`${SETTINGS.API_URL}/${url}`, requestOptions)
-	const parsedData = await reponse.json()
+	const reponse = await fetchData(`${SETTINGS.API_URL}/${url}`, requestOptions);
+	const parsedData = await reponse.json();
 
-	return parsedData
+	return parsedData;
 }
 
 const post = async (url = '', data = {}, options = {}) => {
@@ -19,10 +18,10 @@ const post = async (url = '', data = {}, options = {}) => {
 		method: 'POST',
 		body: JSON.stringify(data)
 	},
-		{ ...options })
+		{ ...options });
 
-	const response = await fetchData(`${SETTINGS.API_URL}/${url}`, requestOptions)
-	return response
+	const response = await fetchData(`${SETTINGS.API_URL}/${url}`, requestOptions);
+	return response;
 }
 
 const del = async (url = '', options = {}) => {
@@ -30,12 +29,10 @@ const del = async (url = '', options = {}) => {
     {
       method: 'DELETE',
     },
-    { ...options }
-  )
+    { ...options });
 
-  const response = await fetchData(`${SETTINGS.API_URL}/${url}`, requestOptions)
-  return response
+  const response = await fetchData(`${SETTINGS.API_URL}/${url}`, requestOptions);
+  return response;
 }
 
 export { get, post, del };
-

@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from '../Styles/LinkButtonStyled';
+import { Button } from '../Styles/linkButtonStyled';
 
-const LinkButton = (props = {}) => {
+const LinkButton = ({ children, ...rest }) => {
 	return (
-		<Button {...props}>
-			{props.children}
+		<Button {...rest}>
+			{children}
 		</Button>
 	)
 }
 
 LinkButton.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.array
+}
+
+LinkButton.defaultProps = {
+	children: ''
 }
 
 export default LinkButton;

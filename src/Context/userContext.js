@@ -7,7 +7,7 @@ import userReducer from './userReducer';
 const userContext = createContext(userInitialState);
 
 const UserProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(userReducer, userInitialState)
+	const [state, dispatch] = useReducer(userReducer, userInitialState);
 
 	return (
 		<userContext.Provider value={{ state, dispatch }}>

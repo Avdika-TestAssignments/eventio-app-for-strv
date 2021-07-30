@@ -4,38 +4,37 @@ import PropTypes from 'prop-types';
 import { getRefreshToken } from '../API/refreshToken';
 import { refreshAuthToken } from '../API/auth';
 import { userContext } from '../Context/userContext';
-import Loader from './Loader';
+import PageLoader from './PageLoader';
 
 const Loginmanager = (props) => {
-	const [readyToRender, setReadyToRender] = useState(false)
-	const { dispatch } = useContext(userContext)
-	const refreshToken = getRefreshToken()
+	const [readyToRender, setReadyToRender] = useState(false);
+	const { dispatch } = useContext(userContext);
+	const refreshToken = getRefreshToken();
 
 	useEffect(() => {
 		const fetchLogin = async () => {
+
 			if (refreshToken) {
-				const response = await refreshAuthToken(refreshToken)
+				const response = await refreshAuthToken(refreshToken);
 
-				dispatch({ type: 'LOGIN', payload: response })
-
+				dispatch({ type: 'LOGIN', payload: response });
 			}
-			setReadyToRender(true)
+			setReadyToRender(true);
 		}
-
 		if (!readyToRender) {
-			fetchLogin()
+			fetchLogin();
 		}
-	}, [readyToRender, dispatch, refreshToken])
+	}, [readyToRender, dispatch, refreshToken]);
 
 	return (
 		<>
-			{readyToRender ? props.children : <Loader />}
+			{readyToRender ? props.children : <PageLoader />}
 		</>
 	)
 }
 
 Loginmanager.propTypes = {
-  children: PropTypes.object.isRequired
+	children: PropTypes.object.isRequired
 }
 
 export default Loginmanager;

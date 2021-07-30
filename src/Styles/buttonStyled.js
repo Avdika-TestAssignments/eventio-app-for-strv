@@ -11,15 +11,16 @@ const button = styled.button`
 	text-transform: uppercase;
 	font-size: ${theme.fontSize.small};
 	cursor: pointer;
-	transition: all .1s ease-in-out;
-	transition: background-color .2s ease-out;
+	transition: ${theme.transition.fast};
 
 	&:focus {
 		outline:0;
 	}
 
 	&:hover {
-		filter: brightness(85%);
+		cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    filter: ${(props) =>
+      props.disabled ? 'brightness(100%)' : 'brightness(85%)'};
 	}
 `
 

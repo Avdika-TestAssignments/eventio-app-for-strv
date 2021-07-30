@@ -1,54 +1,53 @@
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable react/forbid-dom-props */
 import React, { useState, useContext } from 'react';
 import { useForm } from "react-hook-form";
+import { Router } from 'react-router-dom';
 
 import { userLogin } from '../API/auth';
-import ErrorMessage from './ErrorMessage';
 import { userContext } from '../Context/userContext';
-import { FormStyle, StyledButton } from '../Styles/LoginFormStyled';
+import { FormStyle, StyledButton, ErrorMsg, SignUp } from '../Styles/loginFormStyled';
 import Input from './Input';
 import Label from './Label';
 import FormLine from './FormLine';
 import Button from './Button';
+import { SpanText, Link } from '../Styles/typography';
+import { ROUTES } from '../Config/routes';
 
 const LoginForm = () => {
-	const [loginError, setLoginError] = useState(false)
-	const [isSending, setIsSending] = useState(false)
-	const { dispatch } = useContext(userContext)
+	const [loginError, setLoginError] = useState(false);
+	const [isSending, setIsSending] = useState(false);
 	const { register, handleSubmit } = useForm();
+	const { dispatch } = useContext(userContext);
 
-	const _onSubmit = async (data) => {
+	const submitData = async (data) => {
 
 		try {
 			//request sent, show loading
-			setLoginError(false)
-			setIsSending(true)
+			setLoginError(false);
+			setIsSending(true);
 
-			const loginResponse = await userLogin(data)
-			dispatch({ type: 'LOGIN', payload: loginResponse })
-
+			const loginResponse = await userLogin(data);
+			dispatch({ type: 'LOGIN', payload: loginResponse });
+			Router.push(ROUTES.EVENTS);
 		} catch (err) {
-			setLoginError(true)
-		} finally {
-			//request resolved
-			setIsSending(false)
+			setLoginError(true);
+			setIsSending(false);
 		}
 	}
 
 	return (
 		<>
-			<div>{loginError && ErrorMessage('Ooops. Invalid email or password.')}</div>
-				<FormStyle onSubmit={handleSubmit(_onSubmit)}>
+			{loginError && <ErrorMsg>Ooops. Invalid email or password.</ErrorMsg>}
+			<FormStyle onSubmit={handleSubmit(submitData)}>
 				<FormLine
 					renderLabel={() => <Label htmlFor='email'>Email</Label>}
 					renderInput={() => <Input
 						type='email'
 						id='email'
 						placeholder='Email'
-						forwardedref={{...register('email', { required: true })}}
+						forwardedref={{ ...register('email', { required: true }) }}
 						autocomplete="email"
+						// hasError={!!errors.email}
+						errorMsg="Email is required"
 					/>}
 				/>
 				<FormLine
@@ -57,14 +56,21 @@ const LoginForm = () => {
 						type='password'
 						id='password'
 						placeholder='Password'
-						forwardedref={{...register('password', { required: true })}}
+						forwardedref={{ ...register('password', { required: true }) }}
 						autocomplete="current-password"
+						// hasError={!!errors.password}
+						errorMsg="Password is required"
 					/>}
 				/>
+				<SignUp>
+					<SpanText>Don’t have account?</SpanText>
+					<Link href="#register"> SIGN UP</Link>
+				</SignUp>
 				<StyledButton
 					isLoading={isSending}
 					type='submit'
 					color={Button.getTypes().COLOR.PRIMARY}
+					size={Button.getTypes().SIZE.BIG}
 				>
 					Sign in
 				</StyledButton>

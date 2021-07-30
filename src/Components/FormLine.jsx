@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Line } from '../Styles/FormLineStyled';
+import { Line } from '../Styles/formLineStyled';
 
-const FormLine = ({
-	renderLabel = () => {},
-	renderInput = () => {}
-}) => {
+const FormLine = ({ renderLabel, renderInput }) => {
 	return (
 		<Line>
 			{renderLabel()}

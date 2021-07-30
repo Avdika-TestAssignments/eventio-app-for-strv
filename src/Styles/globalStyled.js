@@ -7,8 +7,8 @@ import Playfair from './Fonts/PlayfairDisplay-Regular.ttf';
 
 const GlobalStyles = createGlobalStyle`
 	body {
-		font-family: Hind;
-		color: #C9CED3;
+		font-family: Hind, sans-serif;
+		color: rgb(201, 206, 211);
 	}
 	@font-face {
 		font-family: Hind light;
