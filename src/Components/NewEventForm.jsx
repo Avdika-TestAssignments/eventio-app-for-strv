@@ -15,7 +15,7 @@ const BUTTON_COLOR = {
 	PRIMARY: Button.getTypes().COLOR.PRIMARY
 }
 
-const EventForm = ({ onCreateEvent = () => { } }) => {
+const EventForm = ({ onCreateEvent }) => {
 	const { register, handleSubmit } = useForm();
 	const [isSending, setIsSending] = useState(false);
 

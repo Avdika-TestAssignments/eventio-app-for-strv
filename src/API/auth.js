@@ -4,7 +4,6 @@ import { storeAuthToken } from "./authToken";
 import { storeRefreshToken } from "./refreshToken";
 import { SETTINGS } from "../Config/settings";
 
-
 const refreshAuthToken = async (refreshToken) => {
 	const requestOptions = {
 		headers: {

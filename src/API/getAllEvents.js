@@ -41,8 +41,9 @@ const createEvent = async (data) => {
 
 	if (response && response.status === HTTP_STATUS.CREATED) {
 		const appData = await response.json();
-
+		console.log('appData2', appData);
 		return eventTransformData(appData);
+
 	} else {
 		return {};
 	}
